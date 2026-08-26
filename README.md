@@ -1,83 +1,48 @@
-# Painel PAE - Painel para Análise de Acurácia 
-[![R-Shiny](https://img.shields.io/badge/R-Shiny-blue.svg)](https://shiny.posit.co/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Institution](https://img.shields.io/badge/UFG-LAPIG-green.svg)](https://lapig.iesa.ufg.br/)
-O **Painel PAE (Painel para Análise de Acurácia)** é uma aplicação interativa desenvolvida em linguagem **R** e 
-ecossistema **Shiny** para automação de testes de validação cartográfica e acurácia temática de mapeamentos 
-geoespaciais. 
-O projeto foi desenvolvido no âmbito do Programa Institucional de Bolsas de Iniciação Científica (**PIBIC**) 
-junto ao **Laboratório de Processamento de Imagens e Geoprocessamento (LAPIG)** da **Universidade Federal de 
-Goiás (UFG)**, atuando diretamente no suporte e validação dos dados da rede **MapBiomas**.
+# Painel PAE — Avaliação de Acurácia MapBiomas
+
+Uma aplicação **R/Shiny** interativa e moderna para análise, visualização e validação da acurácia do mapeamento MapBiomas. O painel calcula automaticamente indicadores globais, gera matrizes de confusão proporcionais e exibe séries temporais detalhadas.
+
 ---
-## Funcionalidades Principais
-- **Detecção Automática de Dados:** Reconhece e consolida automaticamente os arquivos da pasta `Data/` 
-(suportando diferentes coleções e níveis de legenda `L1`, `L2`, `L3`).
-- **Cálculo de Matrizes de Confusão Populacionais:** Matrizes de proporção de área (p_ij) agregadas por região, 
-ano e nível.
-- **Métricas Globais e Específicas:**
- - Acurácia Global (AG / OA)
- - Erro Global (EG)
- - Erro de Quantidade (EQ) e Erro de Alocação (EA) — *(Pontius Jr. & Millones, 2011)*
-- **Análise por Classe:**
- - Gráficos no formato "pirâmide" comparando **Acurácia do Usuário (AU)** x **Erro de Comissão** e **Acurácia do 
-Produtor (AP)** x **Erro de Omissão**.
- - Cálculo do **Score F1** por classe.
- - Alternância de matriz de confusão entre **Porcentagem** e **Quantidade Estimada de Amostras**.
-- **Análise Temporal:** Série histórica de Acurácia Global interativa por região/bioma.
-- **Interface Moderna:** Desenvolvida em **bslib** com tema dark nativo (`#181a1b`) e responsividade para 
-diferentes resoluções.
+
+## 🚀 Como Executar o Projeto
+
+**Não é necessário instalar manualmente nenhuma biblioteca do R.** O próprio script gerencia e instala todas as dependências automaticamente na primeira execução.
+
+### Passos para inicialização:
+
+1. Clone ou baixe este repositório para o seu computador.
+2. Certifique-se de que os arquivos `.xlsx` estão dentro da pasta `Data/` (ou `data/`) no mesmo diretório do script.
+3. Abra o arquivo do projeto no RStudio.
+4. **Rode apenas o Bloco 1 do código (`carregar_dependencias()`)**:
+   - Este bloco verifica se você já possui os pacotes necessários (`shiny`, `tidyverse`, `plotly`, `bslib`, `scales`, `shinycssloaders`, `readxl` e `shinyWidgets`).
+   - Caso falte algum pacote, ele fará a instalação automática direto do CRAN e em seguida fará o carregamento de todos eles na sua sessão.
+5. Em seguida, basta executar o restante do script ou clicar no botão **Run App** no canto superior do RStudio.
+
 ---
-## Estrutura do Repositório
-```text
-.
-├── Data/ # Pasta contendo as tabelas do MapBiomas
-│ ├── ALL_CLASSES.xlsx # Tabela oficial de legenda e classes
-│ ├── tabela_mapbiomas_confusion_*.xlsx
-│ └── tabela_mapbiomas_metrics_*.xlsx
-├──PAE.R # Código-fonte principal da aplicação Shiny
-├── Tabelas.zip # Backup compactado dos dados
-├── README.md # Documentação técnica do projeto
-└── LICENSE # Licença MIT
-```
+
+## 🛠️ Estrutura do Código
+
+* **Bloco 1: Gerenciamento de Pacotes e Dependências** — Auto-instalação e carregamento automatizado de todas as bibliotecas necessárias.
+* **Bloco 2: Configuração, Leitura e Tradução** — Detecção automática de diretórios, validação das planilhas de entrada e estruturação dos dados.
+* **Bloco 3: Interface do Usuário (UI)** — Design responsivo em *Dark Mode* (`bslib`), com filtros dinâmicos e navegação por abas.
+* **Bloco 4: Servidor (Server)** — Processamento reativo, cálculo das métricas de acurácia (AG, EG, EQ, EA, UA, PA, F1-Score) e renderização dos gráficos interativos.
+
 ---
-## Pré-requisitos e Instalação
-Para rodar a aplicação localmente, certifique-se de ter o **R** (versão 4.0 ou superior) e o **RStudio** 
-instalados.
-### Pacotes Necessários
-O próprio script instala automaticamente os pacotes ausentes, mas você também pode instalá-los manualmente 
-executando:
-```R
-install.packages(c(
- "shiny",
- "tidyverse",
- "plotly",
- "bslib",
- "scales",
- "shinycssloaders",
- "readxl",
-"shinyWidgets"
-))
-```
+
+## 📋 Pré-requisitos de Dados
+
+Antes de rodar a aplicação, garanta que a pasta `Data/` contém os seguintes arquivos:
+* `ALL_CLASSES.xlsx` — Tabela oficial com a legenda e codificação de classes do MapBiomas.
+* Tabela(s) no formato `*confusion*.xlsx` — Matrizes de confusão brutas/proporcionais.
+* Tabela(s) no formato `*metrics*.xlsx` — Métricas globais e por classe pré-calculadas.
+
 ---
-## Como Executar o Aplicativo
-1. Clone o repositório ou faça o download do projeto:
- ```bash
- git clone https://github.com/Igor-ht-1/painel-pae-shiny.git
- ```
-2. Garanta que as tabelas de métricas, confusão e o arquivo `ALL_CLASSES.xlsx` estejam localizados na pasta 
-**`Data/`**.
-3. Abra o script no RStudio e clique no botão **"Run App"** (ou execute no console):
- ```R
- shiny::runApp("PAE.R")
- ```
----
-## Fundamentação Teórica & Referências
-- **Pontius Jr, R. G.; Millones, M.** (2011). *Death to Kappa: birth of quantity response and allocation 
-disagreement alternatives to Kappa*. International Journal of Remote Sensing, v. 32, n. 15, p. 4407-4429.
-- **MapBiomas.** Mapeamento Anual da Cobertura e Uso da Terra no Brasil. Disponível em: [mapbiomas.org](https://
-mapbiomas.org/).
----
-## Autor e Orientação
-- **Autor:** Igor Rodrigues Soares Santos
-- **Orientador:** Prof. Dr. Luis Rodrigo Fernandes Baumann
-- **Instituição:** Instituto de Matemática e Estatística (IME) / LAPIG - Universidade Federal de Goiás (UFG)
+
+## 📊 Principais Funcionalidades
+
+* **Filtros Personalizados**: Seleção por Nível de Legenda (L1, L2 ou L3), Região/Bioma, Anos da série e Classes específicas.
+* **Cards de Resumo Global**: Métricas instantâneas de Acurácia Global (AG), Erro Global (EG), Erro de Quantidade (EQ) e Erro de Alocação (EA).
+* **Gráficos Interativos**: 
+  * Visualização no estilo piramidal para Acurácia do Usuário (UA) vs Erro de Comissão, e Acurácia do Produtor (PA) vs Erro de Omissão.
+  * Série temporal da Acurácia Global ao longo dos anos selecionados.
+  * Heatmap da Matriz Proporcional com opção de alternar a visualização entre **porcentagem** e **quantidade de amostras estimadas**.
