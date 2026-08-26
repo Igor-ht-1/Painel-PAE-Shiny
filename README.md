@@ -34,7 +34,7 @@ diferentes resoluções.
 │ ├── ALL_CLASSES.xlsx # Tabela oficial de legenda e classes
 │ ├── tabela_mapbiomas_confusion_*.xlsx
 │ └── tabela_mapbiomas_metrics_*.xlsx
-├── novoapp.R # Código-fonte principal da aplicação Shiny
+├──PAE.R # Código-fonte principal da aplicação Shiny
 ├── Tabelas.zip # Backup compactado dos dados
 ├── README.md # Documentação técnica do projeto
 └── LICENSE # Licença MIT
@@ -68,7 +68,7 @@ install.packages(c(
 **`Data/`**.
 3. Abra o script no RStudio e clique no botão **"Run App"** (ou execute no console):
  ```R
- shiny::runApp("novoapp.R")
+ shiny::runApp("PAE.R")
  ```
 ---
 ## Fundamentação Teórica & Referências
