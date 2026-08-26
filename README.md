@@ -1,7 +1,7 @@
 # Painel PAE - Painel para Análise de Acurácia 
 [![R-Shiny](https://img.shields.io/badge/R-Shiny-blue.svg)](https://shiny.posit.co/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Institution](https://img.shields.io/badge/UFG-LAPIG-green.svg)](https://lapig.gi.ufg.br/)
+[![Institution](https://img.shields.io/badge/UFG-LAPIG-green.svg)](https://lapig.iesa.ufg.br/)
 O **Painel PAE (Painel para Análise de Acurácia)** é uma aplicação interativa desenvolvida em 
 linguagem **R** e ecossistema **Shiny** para automação de testes de validação cartográfica e acurácia 
 temática de mapeamentos geoespaciais. 
